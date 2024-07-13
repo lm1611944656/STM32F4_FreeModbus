@@ -182,6 +182,8 @@ eMBErrorCode eMBRegInputCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRe
 */
 eMBErrorCode eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegisterMode eMode )
 {
+	
+	// Modbus的地址
     USHORT usRegIndex = usAddress - 1;  
 	printf("eMBRegHoldingCB\r\n");
 	
@@ -192,7 +194,7 @@ eMBErrorCode eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usN
         return MB_ENOREG;
     }
 	
-	printf("usAddress =%x\r\n", usAddress);					// 打印寄存器地址
+	printf("usAddress =%x\r\n", usAddress);					// 打印寄存器地址1
 	printf("usNRegs = %x\r\n", usNRegs);						// 打印寄存器数量	
 	
 	printf("pucRegBuffer[0]=%x\r\n", pucRegBuffer[0]);		// 打印寄存器缓冲区第一个字节	
@@ -257,7 +259,7 @@ eMBErrorCode eMBRegHoldingCB( UCHAR * pucRegBuffer, USHORT usAddress, USHORT usN
     {
         while( usNRegs > 0 )
         {
-			// 将保持寄存器的高位写入寄存器缓冲区
+			// 取出保持寄存器的高8位写入寄存器缓冲区
             *pucRegBuffer++ = ( unsigned char )( REG_HOLD_BUF[usRegIndex] >> 8 );
 			
 			// 将保持寄存器的低位写入寄存器缓冲区
